@@ -3,355 +3,148 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eletricista Lima | Cotia - SP | Atendimento 24 horas</title>
-  <meta name="description" content="Eletricista Lima em Cotia-SP: instalações, reparos, troca de fiação, iluminação e manutenção elétrica residencial, comercial e industrial. Atendimento 24 horas.">
+  <title>Site em manutenção | Eletricista Lima</title>
+  <meta name="description" content="O site do Eletricista Lima está em manutenção. Atendimento elétrico em Cotia - SP pelo WhatsApp (11) 95218-4814.">
   <meta name="theme-color" content="#0b2a4a">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet">
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Electrician",
-    "name": "Eletricista Lima",
-    "telephone": "+55-11-95218-4814",
-    "openingHours": "Mo-Su 00:00-23:59",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "R. José Menino, 28 - Parque Rincão",
-      "addressLocality": "Cotia",
-      "addressRegion": "SP",
-      "postalCode": "06705-462",
-      "addressCountry": "BR"
-    },
-    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "44" }
-  }
-  </script>
+  <style>
+    :root {
+      --navy-900: #071a2f;
+      --navy-800: #0b2a4a;
+      --navy-600: #1b4a7a;
+      --green: #25d366;
+      --yellow: #ffc83d;
+      --white: #ffffff;
+      --text: #dbe7f5;
+      --muted: #9fb3cc;
+      --border: rgba(255,255,255,.14);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { min-height: 100%; }
+    body {
+      font-family: 'Poppins', system-ui, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      background:
+        radial-gradient(circle at 85% 15%, rgba(37,211,102,.10), transparent 40%),
+        linear-gradient(160deg, var(--navy-800), var(--navy-900));
+      background-attachment: fixed;
+      padding: env(safe-area-inset-top, 0) 0 env(safe-area-inset-bottom, 0);
+    }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+
+    .page {
+      min-height: 100vh;
+      width: min(1100px, 92%);
+      margin-inline: auto;
+      display: flex;
+      flex-direction: column;
+      padding: 28px 0;
+    }
+
+    .brand { display: flex; align-items: center; gap: 12px; color: var(--white); font-weight: 500; font-size: 1.2rem; }
+    .brand strong { color: var(--green); font-weight: 600; }
+    .brand-mark { width: 40px; height: 40px; display: grid; place-items: center; background: var(--green); color: var(--navy-900); border-radius: 10px; }
+    .brand-mark svg { width: 20px; height: 20px; }
+
+    main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 56px;
+      align-items: center;
+      padding: 48px 0;
+    }
+
+    h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); line-height: 1.08; font-weight: 800; color: var(--white); margin-bottom: 20px; letter-spacing: -.02em; }
+    .lead { font-size: 1.1rem; color: var(--muted); max-width: 30em; margin-bottom: 32px; }
+
+    .actions { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 36px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 28px; border-radius: 50px; font-weight: 600; font-size: 1rem; transition: transform .2s, box-shadow .2s, border-color .2s; }
+    .btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-whats { background: var(--green); color: var(--navy-900); box-shadow: 0 10px 25px rgba(37,211,102,.3); }
+    .btn-whats:hover { box-shadow: 0 14px 32px rgba(37,211,102,.45); }
+    .btn-line { border: 2px solid var(--border); color: var(--white); }
+    .btn-line:hover { border-color: var(--green); }
+
+    .info { display: grid; gap: 6px; padding-top: 24px; border-top: 1px solid var(--border); font-size: .95rem; color: var(--muted); max-width: 30em; }
+    .info b { color: var(--white); font-weight: 500; }
+
+    /* Disjuntor: o elemento principal da página */
+    .breaker-wrap { display: grid; place-items: center; }
+    .breaker { width: min(300px, 80%); height: auto; overflow: visible; }
+    .lever { transform-origin: 150px 150px; transform: translateY(0); }
+    .led { fill: #3a2a1c; }
+    .spark { opacity: 0; }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .led { animation: led-warn 2.4s ease-in-out 1s infinite; }
+      .lever { animation: nudge .9s cubic-bezier(.3,1.6,.5,1) .4s both; }
+      .spark { animation: spark .6s ease-out .55s both; }
+    }
+    @keyframes nudge { from { transform: translateY(-14px); } to { transform: translateY(0); } }
+    @keyframes led-warn { 0%, 100% { fill: #3a2a1c; } 50% { fill: var(--yellow); } }
+    @keyframes spark { 0% { opacity: 0; } 30% { opacity: 1; } 100% { opacity: 0; } }
+
+    footer { color: var(--muted); font-size: .85rem; padding-top: 20px; border-top: 1px solid var(--border); }
+
+    @media (max-width: 820px) {
+      main { grid-template-columns: 1fr; gap: 24px; padding: 32px 0; }
+      .breaker-wrap { order: -1; }
+      .breaker { width: 160px; }
+      .btn { width: 100%; }
+    }
+  </style>
 </head>
 <body>
+  <div class="page">
+    <a href="#" class="brand" aria-label="Eletricista Lima">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 2 4 13.5h6.2L9 22l10-12.2h-6.4L13.5 2Z"/></svg>
+      </span>
+      <span>Eletricista <strong>Lima</strong></span>
+    </a>
 
-  <!-- HEADER -->
-  <header class="header" id="header">
-    <div class="container nav">
-      <a href="#inicio" class="logo">
-        <span class="logo-icon"><i class="fa-solid fa-bolt"></i></span>
-        <span>Eletricista <strong>Lima</strong></span>
-      </a>
+    <main>
+      <section>
+        <h1>Site em manutenção</h1>
+        <p class="lead">Estamos fazendo ajustes e o site volta em breve.</p>
+    
 
-      <nav class="menu" id="menu">
-        <a href="#inicio">Início</a>
-        <a href="#atendimento">Atendimento</a>
-        <a href="#servicos">Serviços</a>
-        <a href="#sobre">Quem Somos</a>
-        <a href="#avaliacoes">Avaliações</a>
-        <a href="#contato">Contato</a>
-        <a href="https://wa.me/5511952184814" target="_blank" rel="noopener" class="btn btn-whats btn-sm">
-          <i class="fa-brands fa-whatsapp"></i> WhatsApp
-        </a>
-      </nav>
-
-      <button class="hamburger" id="hamburger" aria-label="Abrir menu"><span></span><span></span><span></span></button>
-    </div>
-  </header>
-
-  <!-- HERO -->
-  <section class="hero" id="inicio">
-    <div class="hero-bg"></div>
-    <div class="container hero-grid">
-      <div class="hero-text reveal">
-        <span class="badge"><i class="fa-solid fa-clock"></i> Aberto 24 horas</span>
-        <h1>Energia que move,<br><span class="gradient-text">segurança que protege!</span></h1>
-        <p>Problemas com a parte elétrica? Deixe com quem entende! Instalações, reparos, troca de fiação, iluminação e manutenção elétrica residencial e comercial, sempre com segurança, qualidade e compromisso.</p>
-
-        <ul class="checks">
-          <li><i class="fa-solid fa-circle-check"></i> Atendimento rápido</li>
-          <li><i class="fa-solid fa-circle-check"></i> Serviço de confiança</li>
-          <li><i class="fa-solid fa-circle-check"></i> Orçamento sem compromisso</li>
-        </ul>
-
-        <div class="hero-buttons">
-          <a href="https://wa.me/5511952184814?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento." target="_blank" rel="noopener" class="btn btn-whats">
-            <i class="fa-brands fa-whatsapp"></i> Chamar no WhatsApp
-          </a>
-          <a href="tel:+5511952184814" class="btn btn-outline"><i class="fa-solid fa-phone"></i> Ligar para mim</a>
-        </div>
+      <div class="breaker-wrap" aria-hidden="true">
+        <svg class="breaker" viewBox="0 0 300 380" xmlns="http://www.w3.org/2000/svg">
+          <!-- corpo -->
+          <rect x="60" y="20" width="180" height="340" rx="22" fill="#123a63" stroke="rgba(255,255,255,.18)" stroke-width="2"/>
+          <rect x="82" y="44" width="136" height="292" rx="14" fill="#0b2a4a" stroke="rgba(255,255,255,.1)" stroke-width="2"/>
+          <!-- fenda da alavanca -->
+          <rect x="116" y="70" width="68" height="190" rx="12" fill="#04101e"/>
+          <!-- alavanca (posição desligado: embaixo) -->
+          <g class="lever">
+            <rect x="124" y="170" width="52" height="84" rx="10" fill="#dbe7f5"/>
+            <rect x="132" y="180" width="36" height="6" rx="3" fill="#9fb3cc"/>
+            <rect x="132" y="194" width="36" height="6" rx="3" fill="#9fb3cc"/>
+          </g>
+          <!-- faíscas ao desarmar -->
+          <g class="spark" stroke="#ffc83d" stroke-width="4" stroke-linecap="round">
+            <path d="M104 168l-18-10"/><path d="M196 168l18-10"/><path d="M100 188l-20 0"/><path d="M200 188l20 0"/>
+          </g>
+          <!-- indicador -->
+          <circle class="led" cx="150" cy="292" r="9" stroke="rgba(255,255,255,.25)" stroke-width="2"/>
+          <text x="150" y="322" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="600" font-size="14" fill="#9fb3cc">OFF</text>
+        </svg>
       </div>
+    </main>
 
-      <div class="hero-card reveal">
-        <div class="profile-card">
-          <div class="avatar" id="avatar"><i class="fa-solid fa-user-gear"></i></div>
-          <h3>ELETRICISTA LIMA</h3>
-          <p class="role">Eletricista Encanador</p>
-          <div class="stars">
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-            <span>5,0 (44 avaliações)</span>
-          </div>
-          <div class="mini-grid">
-            <a href="https://wa.me/5511952184814" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span></a>
-            <a href="tel:+5511952184814"><i class="fa-solid fa-phone"></i><span>Ligar</span></a>
-            <a href="#servicos"><i class="fa-solid fa-screwdriver-wrench"></i><span>Serviços</span></a>
-            <a href="#contato"><i class="fa-solid fa-location-dot"></i><span>Estou aqui</span></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <footer>© <span id="year"></span> Eletricista Lima. Todos os direitos reservados.</footer>
+  </div>
 
-  <!-- NÚMEROS -->
-  <section class="stats">
-    <div class="container stats-grid">
-      <div class="stat reveal"><strong>5,0</strong><span>Nota no Google</span></div>
-      <div class="stat reveal"><strong>44</strong><span>Avaliações</span></div>
-      <div class="stat reveal"><strong>24h</strong><span>Atendimento</span></div>
-      <div class="stat reveal"><strong>4</strong><span>Tipos de atendimento</span></div>
-    </div>
-  </section>
-
-  <!-- TIPOS DE ATENDIMENTO -->
-  <section class="section" id="atendimento">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="tag">Atendimento</span>
-        <h2>Para cada necessidade, o <span class="gradient-text">eletricista certo</span></h2>
-        <p>Escolha o tipo de atendimento e veja o que posso fazer por você.</p>
-      </div>
-
-      <div class="types">
-        <article class="type reveal">
-          <div class="icon"><i class="fa-solid fa-store"></i></div>
-          <h3>Eletricista Comercial</h3>
-          <p>Atendimento emergencial e manutenção em quadros de distribuição, padrão de entrada, proteção contra surtos, diagnóstico de falhas, troca de disjuntores, restabelecimento de energia, lâmpadas, tomadas e reparos gerais.</p>
-          <a href="#contato" class="link">Pedir orçamento <i class="fa-solid fa-arrow-right"></i></a>
-        </article>
-
-        <article class="type reveal">
-          <div class="icon"><i class="fa-solid fa-industry"></i></div>
-          <h3>Eletricista Industrial</h3>
-          <p>Manutenção de comandos elétricos, motores, sistemas trifásicos, máquinas e bombas, além de manutenção preventiva em geradores e quadros gerais de baixa tensão.</p>
-          <a href="#contato" class="link">Pedir orçamento <i class="fa-solid fa-arrow-right"></i></a>
-        </article>
-
-        <article class="type reveal">
-          <div class="icon"><i class="fa-solid fa-house"></i></div>
-          <h3>Eletricista Residencial</h3>
-          <p>Fiação para casas e apartamentos, montagem de quadros de disjuntores, proteção contra surtos, circuitos para chuveiros, tomadas, iluminação, ventiladores de teto e automação residencial.</p>
-          <a href="#contato" class="link">Pedir orçamento <i class="fa-solid fa-arrow-right"></i></a>
-        </article>
-
-        <article class="type reveal">
-          <div class="icon"><i class="fa-solid fa-building"></i></div>
-          <h3>Eletricista Predial</h3>
-          <p>Reparos em tomadas, iluminação e quadros, passagem de cabos para forno elétrico, cooktop, geladeira e ar condicionado, conversão de tensão 127/220 V e instalação de ventiladores de teto.</p>
-          <a href="#contato" class="link">Pedir orçamento <i class="fa-solid fa-arrow-right"></i></a>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- SERVIÇOS -->
-  <section class="section alt" id="servicos">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="tag">O que fazemos</span>
-        <h2>Nossos <span class="gradient-text">Serviços</span></h2>
-        <p>Soluções completas em elétrica para sua casa, comércio ou indústria.</p>
-      </div>
-
-      <div class="tabs reveal" id="tabs">
-        <button class="tab active" data-filter="todos">Todos</button>
-        <button class="tab" data-filter="residencial">Residencial</button>
-        <button class="tab" data-filter="comercial">Comercial</button>
-        <button class="tab" data-filter="industrial">Industrial</button>
-      </div>
-
-      <div class="cards" id="cards"><!-- gerado pelo script.js --></div>
-    </div>
-  </section>
-
-  <!-- QUEM SOMOS -->
-  <section class="section about" id="sobre">
-    <div class="container about-grid">
-      <div class="about-visual reveal">
-        <div class="about-box">
-          <i class="fa-solid fa-bolt"></i>
-          <h3>Segurança em<br>primeiro lugar</h3>
-          <p>Serviço feito seguindo as normas técnicas e com o cuidado que sua instalação merece.</p>
-        </div>
-      </div>
-
-      <div class="about-text reveal">
-        <span class="tag">Quem somos</span>
-        <h2>Profissional de <span class="gradient-text">confiança</span> na sua região</h2>
-        <p>O Eletricista Lima atende Cotia e região com instalações, reparos, troca de fiação, iluminação e manutenção elétrica residencial e comercial, com segurança, qualidade e compromisso.</p>
-        <p>Pontualidade, organização e honestidade são a base do trabalho, e as avaliações dos clientes mostram isso: muitos voltam e indicam para amigos e familiares.</p>
-
-        <div class="features">
-          <div><i class="fa-solid fa-circle-check"></i> Atendimento rápido</div>
-          <div><i class="fa-solid fa-circle-check"></i> Preço justo</div>
-          <div><i class="fa-solid fa-circle-check"></i> Profissional honesto</div>
-          <div><i class="fa-solid fa-circle-check"></i> Pontualidade</div>
-        </div>
-
-        <a href="#contato" class="btn btn-primary">Solicitar orçamento <i class="fa-solid fa-arrow-right"></i></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- AVALIAÇÕES -->
-  <section class="section" id="avaliacoes">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="tag">Depoimentos</span>
-        <h2>Opinião dos <span class="gradient-text">nossos clientes</span></h2>
-        <p><i class="fa-brands fa-google"></i> Nota 5,0 no Google com 44 avaliações</p>
-      </div>
-
-      <div class="slider reveal">
-        <div class="slides" id="slides">
-          <div class="slide">
-            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-            <p>"Excelente profissional! Pontual, solícito, organizado. Faz serviços comigo há anos, indico de olhos fechados."</p>
-            <div class="author"><span class="ava">L</span><div><strong>Leandro Silva</strong><small>Avaliação no Google</small></div></div>
-          </div>
-          <div class="slide">
-            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-            <p>"Excelente profissional, super atencioso e rápido no atendimento."</p>
-            <div class="author"><span class="ava">H</span><div><strong>Helena Silva</strong><small>Avaliação no Google</small></div></div>
-          </div>
-          <div class="slide">
-            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-            <p>"Ótimo profissional. Muito organizado e competente."</p>
-            <div class="author"><span class="ava">F</span><div><strong>Felipe Martins</strong><small>Avaliação no Google</small></div></div>
-          </div>
-          <div class="slide">
-            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-            <p>"Muito boa, atendeu minhas urgências e necessidade."</p>
-            <div class="author"><span class="ava">G</span><div><strong>Cliente Google</strong><small>Avaliação no Google</small></div></div>
-          </div>
-          <div class="slide">
-            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-            <p>"Um bom profissional, honesto e o serviço é de qualidade."</p>
-            <div class="author"><span class="ava">G</span><div><strong>Cliente Google</strong><small>Avaliação no Google</small></div></div>
-          </div>
-        </div>
-
-        <div class="slider-controls">
-          <button id="prev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
-          <div class="dots" id="dots"></div>
-          <button id="next" aria-label="Próximo"><i class="fa-solid fa-chevron-right"></i></button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta">
-    <div class="container reveal">
-      <h2>Está com problema elétrico agora?</h2>
-      <p>Atendimento 24 horas. Chame no WhatsApp e receba seu orçamento sem compromisso.</p>
-      <a href="https://wa.me/5511952184814?text=Ol%C3%A1%2C%20preciso%20de%20atendimento%20el%C3%A9trico." target="_blank" rel="noopener" class="btn btn-whats btn-lg">
-        <i class="fa-brands fa-whatsapp"></i> (11) 95218-4814
-      </a>
-    </div>
-  </section>
-
-  <!-- CONTATO -->
-  <section class="section" id="contato">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="tag">Contato</span>
-        <h2>Solicite seu <span class="gradient-text">orçamento</span></h2>
-        <p>Preencha o formulário e sua mensagem será enviada direto para o meu WhatsApp.</p>
-      </div>
-
-      <div class="contact-grid">
-        <div class="contact-info reveal">
-          <div class="info-item">
-            <span class="info-icon"><i class="fa-brands fa-whatsapp"></i></span>
-            <div><small>WhatsApp</small><a href="https://wa.me/5511952184814" target="_blank" rel="noopener">(11) 95218-4814</a></div>
-          </div>
-          <div class="info-item">
-            <span class="info-icon"><i class="fa-solid fa-phone"></i></span>
-            <div><small>Telefone</small><a href="tel:+5511952184814">(11) 95218-4814</a></div>
-          </div>
-          <div class="info-item">
-            <span class="info-icon"><i class="fa-solid fa-location-dot"></i></span>
-            <div><small>Endereço</small><span>R. José Menino, 28 - Parque Rincão<br>Cotia - SP, 06705-462</span></div>
-          </div>
-          <div class="info-item">
-            <span class="info-icon"><i class="fa-solid fa-clock"></i></span>
-            <div><small>Horário</small><span>Aberto 24 horas</span></div>
-          </div>
-          <div class="map">
-            <iframe src="https://www.google.com/maps?q=R.+Jos%C3%A9+Menino,+28+-+Parque+Rinc%C3%A3o,+Cotia+-+SP&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa"></iframe>
-          </div>
-        </div>
-
-        <form class="form reveal" id="form" novalidate>
-          <div class="field">
-            <label for="nome">Nome</label>
-            <input type="text" id="nome" placeholder="Seu nome" required>
-            <small class="error"></small>
-          </div>
-          <div class="field">
-            <label for="email">E-mail</label>
-            <input type="email" id="email" placeholder="seu@email.com" required>
-            <small class="error"></small>
-          </div>
-          <div class="field">
-            <label for="assunto">Assunto</label>
-            <select id="assunto" required>
-              <option value="">Selecione o assunto</option>
-              <option>Instalação elétrica</option>
-              <option>Reparo / Manutenção</option>
-              <option>Restabelecimento de energia</option>
-              <option>Iluminação</option>
-              <option>Quadro de disjuntores</option>
-              <option>Chuveiro / Torneira elétrica</option>
-              <option>Automação residencial</option>
-              <option>Carregador veicular</option>
-              <option>Energia solar</option>
-              <option>Outro</option>
-            </select>
-            <small class="error"></small>
-          </div>
-          <div class="field">
-            <label for="mensagem">Mensagem</label>
-            <textarea id="mensagem" rows="4" placeholder="Descreva o que você precisa" required></textarea>
-            <small class="error"></small>
-          </div>
-          <button type="submit" class="btn btn-whats btn-block"><i class="fa-brands fa-whatsapp"></i> Enviar pelo WhatsApp</button>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container footer-grid">
-      <div>
-        <a href="#inicio" class="logo">
-          <span class="logo-icon"><i class="fa-solid fa-bolt"></i></span>
-          <span>Eletricista <strong>Lima</strong></span>
-        </a>
-        <p>Energia que move, segurança que protege!</p>
-      </div>
-      <div class="social">
-        <a href="https://wa.me/5511952184814" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-      </div>
-    </div>
-    <div class="copy">© <span id="year"></span> Eletricista Lima. Todos os direitos reservados.</div>
-  </footer>
-
-  <a href="https://wa.me/5511952184814" target="_blank" rel="noopener" class="float-whats" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-  <button class="to-top" id="toTop" aria-label="Voltar ao topo"><i class="fa-solid fa-chevron-up"></i></button>
-
-  <script src="script.js"></script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
